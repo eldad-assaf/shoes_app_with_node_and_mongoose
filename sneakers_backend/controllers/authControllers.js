@@ -30,7 +30,7 @@ module.exports = {
     //first, find the user by his Email
 
     try {
-      const user = await User.find({ email: req.body.email });
+      const user = await User.findOne({ email: req.body.email });
 
       !user && res.status(401).json("Could not find the user");
 
@@ -51,7 +51,7 @@ module.exports = {
         { expiresIn: "21d" }
       );
 
-      const { password, __v, createdAt, ...others } = user._doc;
+      const { password, __v, createdAt,updatedAt ,  ...others } = user._doc;
 
       res.status(200).json({ ...others, token: userToken });
     } catch (error) {
