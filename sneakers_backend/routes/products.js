@@ -4,7 +4,7 @@ const productController = require('../controllers/productsControllers')
 
 router.get('/' , productController.getAllProduct)
 router.get('/:id' , productController.getProduct)
-router.get('search/:Key' , productController.searchProduct)
+router.get('/search/:Key' , productController.searchProduct)
 router.post('/' , productController.createProduct)
 
 
