@@ -50,19 +50,19 @@ class BottoNavBar extends StatelessWidget {
                       ? Ionicons.add
                       : Ionicons.add_circle_outline,
                 ),
+                // BotomNavWidget(
+                //   onTap: () {
+                //     mainScreenNotifier.pageIndex = 3;
+                //   },
+                //   icon: mainScreenNotifier.pageIndex == 3
+                //       ? Ionicons.cart
+                //       : Ionicons.cart_outline,
+                // ),
                 BotomNavWidget(
                   onTap: () {
                     mainScreenNotifier.pageIndex = 3;
                   },
                   icon: mainScreenNotifier.pageIndex == 3
-                      ? Ionicons.cart
-                      : Ionicons.cart_outline,
-                ),
-                BotomNavWidget(
-                  onTap: () {
-                    mainScreenNotifier.pageIndex = 4;
-                  },
-                  icon: mainScreenNotifier.pageIndex == 4
                       ? Ionicons.person
                       : Ionicons.person_outline,
                 ),

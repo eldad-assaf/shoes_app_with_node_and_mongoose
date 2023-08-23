@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // overall theme and app layout
     return ScreenUtilInit(
+        //For iphone 13 pro
         designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,

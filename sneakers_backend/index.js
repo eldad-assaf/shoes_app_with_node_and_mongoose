@@ -8,6 +8,7 @@ const productRoute = require('./routes/products');
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
 const ordersRoute = require('./routes/orders');
+const cartRoute = require('./routes/cart');
 
 
 const port = 3005;
@@ -27,6 +28,8 @@ mongoose
   app.use('/api/products' , productRoute)
   app.use('/api/users' , userRoute)
   app.use('/api/orders' , ordersRoute)
+  app.use('/api/cart' , cartRoute)
+
 
 
 

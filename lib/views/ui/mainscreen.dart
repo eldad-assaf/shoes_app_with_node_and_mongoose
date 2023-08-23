@@ -6,7 +6,6 @@ import 'package:shoes_app_with_node_and_mongoose/views/ui/searchpage.dart';
 
 import '../../controllers/mainscreen_provider.dart';
 import '../shared/bottom_nav.dart';
-import 'cartpage.dart';
 import 'homepage.dart';
 
 // ignore: must_be_immutable
@@ -17,7 +16,6 @@ class MainScreen extends StatelessWidget {
     const HomePage(),
     const SearchPage(),
     const HomePage(),
-    CartPage(),
     const ProfilePage()
   ];
 
