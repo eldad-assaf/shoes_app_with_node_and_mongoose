@@ -41,74 +41,77 @@ class _ProductCardState extends State<ProductCard> {
                 blurRadius: 0.6,
                 offset: Offset(1, 1))
           ]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.23,
-                    decoration: BoxDecoration(
-                        image:
-                            DecorationImage(image: NetworkImage(widget.image))),
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: GestureDetector(
-                      onTap: null,
-                      child: const Icon(MaterialCommunityIcons.heart_outline),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
                   children: [
-                    Text(
-                      widget.name,
-                      style: appstyleWithHt(
-                          36, Colors.black, FontWeight.bold, 1.1),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.23,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(widget.image))),
                     ),
-                    Text(
-                      widget.category,
-                      style:
-                          appstyleWithHt(18, Colors.grey, FontWeight.bold, 1.5),
-                    )
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: GestureDetector(
+                        onTap: null,
+                        child: const Icon(MaterialCommunityIcons.heart_outline),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.price,
-                      style: appstyle(30, Colors.black, FontWeight.w600),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Colors",
-                          style: appstyle(18, Colors.grey, FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        ChoiceChip(label: const Text(" "), 
-                        selected: selected,
-                        visualDensity: VisualDensity.compact,
-                        selectedColor: Colors.black,
-                        )
-                      ],
-                    )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.name,
+                        style: appstyleWithHt(
+                            36, Colors.black, FontWeight.bold, 1.1),
+                      ),
+                      Text(
+                        widget.category,
+                        style: appstyleWithHt(
+                            18, Colors.grey, FontWeight.bold, 1.5),
+                      )
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.price,
+                        style: appstyle(30, Colors.black, FontWeight.w600),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Colors",
+                            style: appstyle(18, Colors.grey, FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          ChoiceChip(
+                            label: const Text(" "),
+                            selected: selected,
+                            visualDensity: VisualDensity.compact,
+                            selectedColor: Colors.black,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -3,11 +3,12 @@ const Product = require("../models/Product");
 module.exports = {
   createProduct: async (req, res) => {
     console.log('create product');
-    console.log(req.body);
+    //console.log(req.body);
     const newProduct = new Product(req.body);
 
 
 
+    console.log(newProduct)
     try {
       await newProduct.save();
       res.status(200).json("Product created");

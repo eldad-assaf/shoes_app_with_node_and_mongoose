@@ -1,6 +1,5 @@
 [
   {
-    "id": "0",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -22,7 +21,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "1",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "oldPrice": "99.00",
@@ -44,7 +42,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "2",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -66,7 +63,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "3",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -88,7 +84,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "4",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -110,7 +105,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "5",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -132,7 +126,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "6",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -154,7 +147,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "7",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -176,7 +168,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "8",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
@@ -198,7 +189,6 @@
     "title": "Adidas Running Shoes With Cooling Ventilations"
   },
   {
-    "id": "9",
     "name": "UltraBoost Shoes",
     "category": "Men's Running",
     "imageUrl": [
