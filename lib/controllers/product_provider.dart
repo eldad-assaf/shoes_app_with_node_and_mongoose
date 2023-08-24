@@ -13,6 +13,7 @@ class ProductNotifier extends ChangeNotifier {
   }
 
   List<dynamic> get shoeSizes => _shoeSizes;
+  
 
   set shoesSizes(List<dynamic> newSizes) {
     _shoeSizes = newSizes;

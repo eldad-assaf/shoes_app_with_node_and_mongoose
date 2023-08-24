@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/services.dart' as the_bundle;
 import 'package:shoes_app_with_node_and_mongoose/services/config.dart';
 
 import '../models/sneaker_model.dart';
@@ -60,39 +59,17 @@ class Helper {
     }
   }
 
-  // Single Male
-  Future<Sneakers> getMaleSneakersById(String id) async {
-    final data =
-        await the_bundle.rootBundle.loadString("assets/json/men_shoes.json");
+  Future<List<Sneakers>> search(String searchQuery) async {
+    var url = Uri.http(Config.apiUrl, "${Config.search}$searchQuery");
 
-    final maleList = sneakersFromJson(data);
+    var response = await client.get(url);
 
-    final sneaker = maleList.firstWhere((sneaker) => sneaker.id == id);
+    if (response.statusCode == 200) {
+      final results = sneakersFromJson(response.body);
 
-    return sneaker;
-  }
-
-  // Single Male
-  Future<Sneakers> getFemaleSneakersById(String id) async {
-    final data =
-        await the_bundle.rootBundle.loadString("assets/json/women_shoes.json");
-
-    final maleList = sneakersFromJson(data);
-
-    final sneaker = maleList.firstWhere((sneaker) => sneaker.id == id);
-
-    return sneaker;
-  }
-
-  // Single Kids
-  Future<Sneakers> getKidsSneakersById(String id) async {
-    final data =
-        await the_bundle.rootBundle.loadString("assets/json/kids_shoes.json");
-
-    final maleList = sneakersFromJson(data);
-
-    final sneaker = maleList.firstWhere((sneaker) => sneaker.id == id);
-
-    return sneaker;
+      return results;
+    } else {
+      throw Exception('Failed to get sneakers list');
+    }
   }
 }

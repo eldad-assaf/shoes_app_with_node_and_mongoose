@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -52,8 +54,8 @@ class HomeWidget extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ProductPage(
-                                            id: shoe.id,
-                                            category: shoe.category)));
+                                              sneakers: shoe,
+                                            )));
                               },
                               child: ProductCard(
                                 price: "\$${shoe.price}",
@@ -125,6 +127,15 @@ class HomeWidget extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: NewShoes(
                                 imageUrl: shoe.imageUrl[1],
+                                onTap: () {
+                                  log('eldad');
+                                  //  productNotifier.shoesSizes = shoe.sizes;
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductPage(sneakers: shoe)));
+                                },
                               ),
                             );
                           });

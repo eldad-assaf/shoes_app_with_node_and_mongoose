@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/stagger_tile.dart';
+import 'package:shoes_app_with_node_and_mongoose/views/ui/product_page.dart';
 
 import '../../models/sneaker_model.dart';
 
@@ -18,7 +19,7 @@ class LatestShoes extends StatelessWidget {
         future: _male,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator.adaptive());
           } else if (snapshot.hasError) {
             return Text("Error ${snapshot.error}");
           } else {
@@ -30,20 +31,27 @@ class LatestShoes extends StatelessWidget {
                 mainAxisSpacing: 16,
                 itemCount: male!.length,
                 scrollDirection: Axis.vertical,
-                staggeredTileBuilder: (index) =>
-                    StaggeredTile.extent(
-                        (index % 2 == 0) ? 1 : 1,
-                        (index % 4 == 1 || index % 4 == 3)
-                            ? MediaQuery.of(context).size.height *
-                                0.35
-                            : MediaQuery.of(context).size.height *
-                                0.3),
+                staggeredTileBuilder: (index) => StaggeredTile.extent(
+                    (index % 2 == 0) ? 1 : 1,
+                    (index % 4 == 1 || index % 4 == 3)
+                        ? MediaQuery.of(context).size.height * 0.35
+                        : MediaQuery.of(context).size.height * 0.3),
                 itemBuilder: (context, index) {
                   final shoe = snapshot.data![index];
-                  return StaggerTile(
-                      imageUrl: shoe.imageUrl[1],
-                      name: shoe.name,
-                      price: "\$${shoe.price}");
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductPage(sneakers: shoe),
+                        ),
+                      );
+                    },
+                    child: StaggerTile(
+                        imageUrl: shoe.imageUrl[1],
+                        name: shoe.name,
+                        price: "\$${shoe.price}"),
+                  );
                 });
           }
         });
