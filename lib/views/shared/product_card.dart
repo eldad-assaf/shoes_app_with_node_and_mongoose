@@ -86,9 +86,14 @@ class _ProductCardState extends State<ProductCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.price,
-                        style: appstyle(30, Colors.black, FontWeight.w600),
+                      Flexible(
+                        // Wrap the price Text widget in Flexible
+                        child: Text(
+                          widget.price,
+                          style: appstyle(20, Colors.black, FontWeight.w600),
+                          overflow: TextOverflow
+                              .ellipsis, // Handle overflow with ellipsis
+                        ),
                       ),
                       Row(
                         children: [
