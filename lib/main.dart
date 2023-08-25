@@ -12,7 +12,6 @@ import 'package:shoes_app_with_node_and_mongoose/views/ui/mainscreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
   await Hive.initFlutter();
 
   await Hive.openBox('cart_box');
@@ -22,7 +21,6 @@ void main() async {
     ChangeNotifierProvider(create: (context) => MainScreenNotifier()),
     ChangeNotifierProvider(create: (context) => ProductNotifier()),
     ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
-
   ], child: const MyApp()));
 }
 
@@ -43,8 +41,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'dbestech',
             theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
+                primarySwatch: Colors.blue,
+                scaffoldBackgroundColor: const Color(0xFFE2E2E2)),
 
             // sets the homescreen of the app
             home: MainScreen(),

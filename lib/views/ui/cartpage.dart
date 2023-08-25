@@ -7,7 +7,6 @@ import 'package:shoes_app_with_node_and_mongoose/views/shared/appstyle.dart';
 
 import '../shared/checkout_btn.dart';
 
-
 class CartPage extends StatelessWidget {
   CartPage({super.key});
 
@@ -235,8 +234,10 @@ class CartPage extends StatelessWidget {
                 )
               ],
             ),
-            const Align(alignment: Alignment.bottomCenter,
-            child: CheckoutButton(label: "Proceed to Checkout"),),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: CheckoutButton(label: "Proceed to Checkout"),
+            ),
           ],
         ),
       ),

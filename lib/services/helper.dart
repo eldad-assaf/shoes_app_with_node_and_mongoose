@@ -63,7 +63,7 @@ class Helper {
     var url = Uri.http(Config.apiUrl, "${Config.search}$searchQuery");
 
     var response = await client.get(url);
-
+    log(url.toString());
     if (response.statusCode == 200) {
       final results = sneakersFromJson(response.body);
 
