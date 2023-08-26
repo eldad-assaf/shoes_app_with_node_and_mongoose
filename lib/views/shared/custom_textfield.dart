@@ -22,6 +22,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: BoxDecoration(
           color: Colors.grey.shade300,
@@ -30,10 +31,11 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboard,
           obscureText: obscureText ?? false,
           // initialValue: initialValue,
+
           decoration: InputDecoration(
               hintText: hintText,
               suffixIcon: suffixIcon,
-              suffixIconColor: Colors.amber,
+              suffixIconColor: Colors.black,
               hintStyle: appstyle(14, Colors.black38, FontWeight.w500),
               // contentPadding: EdgeInsets.only(left: 24),
               errorBorder: const OutlineInputBorder(
@@ -59,7 +61,7 @@ class CustomTextField extends StatelessWidget {
               border: InputBorder.none),
           controller: controller,
           cursorHeight: 25,
-          style: appstyle(14, Colors.amberAccent, FontWeight.w500),
+          style: appstyle(14, Colors.black, FontWeight.w500),
           validator: validator),
     );
   }

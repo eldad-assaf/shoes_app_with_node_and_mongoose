@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class FavoritesNotifier extends ChangeNotifier {
   List<dynamic> _ids = [];
   List<dynamic> _favorites = [];
@@ -11,23 +10,10 @@ class FavoritesNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-   List<dynamic> get favorites => _favorites;
+  List<dynamic> get favorites => _favorites;
 
   set favorites(List<dynamic> newFav) {
     _favorites = newFav;
     notifyListeners();
   }
-
-
-
-
-
-
-
-
 }
-
-
-
-
-

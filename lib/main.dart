@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/favourites_provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/mainscreen_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/product_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/ui/mainscreen.dart';
@@ -21,6 +22,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => MainScreenNotifier()),
     ChangeNotifierProvider(create: (context) => ProductNotifier()),
     ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
+    ChangeNotifierProvider(create: (context) => LoginProvider()),
   ], child: const MyApp()));
 }
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/services/auth_helper.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/appstyle.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/custom_textfield.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/reuseable_text.dart';
@@ -18,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var authNotifier = Provider.of<LoginProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -45,11 +49,43 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 50.h,
             ),
-            CustomTextField(hintText: 'Email', controller: email),
+            CustomTextField(
+              hintText: 'Email',
+              controller: email,
+              validator: (email) {
+                if (email!.isEmpty || !email.contains('@')) {
+                  return 'Please provide a valid email';
+                } else {
+                  return null;
+                }
+              },
+              keyboard: TextInputType.emailAddress,
+            ),
             SizedBox(
               height: 15.h,
             ),
-            CustomTextField(hintText: 'Password', controller: password),
+            CustomTextField(
+              hintText: 'Password',
+              controller: password,
+              obscureText: authNotifier.isObsecure,
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  authNotifier.isObsecure = !authNotifier.isObsecure;
+                },
+                child: authNotifier.isObsecure
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(
+                        Icons.visibility,
+                      ),
+              ),
+              validator: (password) {
+                if (password!.isEmpty || password.length < 7) {
+                  return 'Password too weak';
+                } else {
+                  return null;
+                }
+              },
+            ),
             SizedBox(
               height: 10.h,
             ),
@@ -67,6 +103,31 @@ class _LoginPageState extends State<LoginPage> {
                     style: appstyle(14, Colors.white, FontWeight.normal)),
               ),
             ),
+            SizedBox(
+              height: 50.h,
+            ),
+            GestureDetector(
+              onDoubleTap: () {},
+              child: Container(
+                height: 50.h,
+                width: 300.w,
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(0))),
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await AuthHelper().login(
+                          email: 'eldadassaf2@gmail.com',
+                          password: '123456789');
+                    },
+                    child: ReusableText(
+                        text: 'L O G I N',
+                        style: appstyle(18, Colors.black, FontWeight.bold)),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
