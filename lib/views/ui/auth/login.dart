@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/models/login_model.dart';
-import 'package:shoes_app_with_node_and_mongoose/services/auth_helper.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/appstyle.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/custom_textfield.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/reuseable_text.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/ui/auth/registration.dart';
+import 'package:shoes_app_with_node_and_mongoose/views/ui/mainscreen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,9 +20,19 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  bool validation = false;
+
+  void formValidation() {
+    if (email.text.isNotEmpty && password.text.isNotEmpty) {
+      validation = true;
+    } else {
+      validation = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var authNotifier = Provider.of<LoginProvider>(context);
+    var authNotifier = Provider.of<LoginNotifier>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -109,12 +119,34 @@ class _LoginPageState extends State<LoginPage> {
             ),
             GestureDetector(
               onTap: () async {
-                final didLogin = await AuthHelper().login(LoginModel(
-                    email: 'eldadassaf2@gmail.com', password: '123456789'));
+                formValidation();
+                if (validation == true) {
+                  //"email" : "eldadassaf2@gmail.com" , "password" : "123456789"
 
-                if (didLogin) {
-                  await AuthHelper().getProfile();
+                  LoginModel model = LoginModel(
+                      email: 'eldadassaf2@gmail.com', password: '123456789');
+                  // LoginModel model =
+                  //     LoginModel(email: email.text, password: password.text);
+
+                  await authNotifier.userLogin(model).then((response) {
+                    if (response == true) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreen()));
+                    } else {
+                      debugPrint('failed to loggin');
+                    }
+                  });
+                } else {
+                  debugPrint('form not validated');
                 }
+                // final didLogin = await AuthHelper().login(LoginModel(
+                //     email: 'eldadassaf2@gmail.com', password: '123456789'));
+
+                // if (didLogin) {
+                //   await AuthHelper().getProfile();
+                // }
               },
               child: Container(
                 height: 50.h,

@@ -1,15 +1,20 @@
 // ignore_for_file: avoid_print
 
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/cart_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/favourites_provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/checkout_btn.dart';
 
 import '../../controllers/product_provider.dart';
+import '../../models/add_to_cart.dart';
 import '../../models/sneaker_model.dart';
 import '../shared/appstyle.dart';
 
@@ -45,6 +50,8 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     var favouritesNotifier = Provider.of<FavoritesNotifier>(context);
+    var authNotifier = Provider.of<LoginNotifier>(context);
+    var cartNotifier = Provider.of<CartNotifier>(context);
 
     return Scaffold(body: Consumer<ProductNotifier>(
       builder: (context, productNotifier, child) {
@@ -358,6 +365,17 @@ class _ProductPageState extends State<ProductPage> {
                                       padding: const EdgeInsets.only(top: 0),
                                       child: CheckoutButton(
                                         onTap: () async {
+                                          if (authNotifier.loggedIn == true) {
+                                            AddToCart addToCart = AddToCart(
+                                                cartItem: widget.sneakers.id,
+                                                quantity: 1);
+
+                                            cartNotifier
+                                                .addToCart(addToCart)
+                                                .then((value) {
+                                              log('add to cart  : $value');
+                                            });
+                                          }
                                           _createCart({
                                             "id": widget.sneakers.id,
                                             "name": widget.sneakers.name,

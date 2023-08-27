@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/models/sneaker_model.dart';
 
 import '../../services/helper.dart';
@@ -43,7 +44,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    
+    var authNotifier = Provider.of<LoginNotifier>(context);
+    authNotifier.getPrefs();
     return Scaffold(
       backgroundColor: const Color(0xFFE2E2E2),
       body: SizedBox(

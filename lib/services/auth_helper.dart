@@ -27,17 +27,16 @@ class AuthHelper {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String userToken = loginResponseModelFromJson(response.body).token;
       final String userId = loginResponseModelFromJson(response.body).token;
-
       prefs.setString('token', userToken);
       prefs.setString('userId', userId);
-      log('should return true');
+      prefs.setBool('isLogged', true);
       return true;
     } else {
       return false;
     }
   }
 
-  Future<bool?> signup(SignupModel model) async {
+  Future<bool> signup(SignupModel model) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
     var url = Uri.http(Config.apiUrl, Config.signupUrl);
 
@@ -46,12 +45,6 @@ class AuthHelper {
 
     log(response.statusCode.toString());
     if (response.statusCode == 201) {
-      // final SharedPreferences prefs = await SharedPreferences.getInstance();
-      // final String userToken = loginResponseModelFromJson(response.body).token;
-      // final String userId = loginResponseModelFromJson(response.body).token;
-
-      // prefs.setString('token', userToken);
-      // prefs.setString('userId', userId);
       return true;
     } else {
       return false;
@@ -76,4 +69,6 @@ class AuthHelper {
       throw Exception('Failed to get the profile');
     }
   }
+
+  
 }

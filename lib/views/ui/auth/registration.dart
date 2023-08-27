@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/models/signup_model.dart';
-import 'package:shoes_app_with_node_and_mongoose/services/auth_helper.dart';
+import 'package:shoes_app_with_node_and_mongoose/views/ui/auth/login.dart';
 
 import '../../../controllers/login_provider.dart';
 import '../../shared/appstyle.dart';
@@ -21,9 +21,21 @@ class _RegistrationState extends State<Registration> {
   TextEditingController password = TextEditingController();
   TextEditingController username = TextEditingController();
 
+  bool validation = false;
+
+  void formValidation() {
+    if (email.text.isNotEmpty &&
+        password.text.isNotEmpty &&
+        username.text.isNotEmpty) {
+      validation = true;
+    } else {
+      validation = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var authNotifier = Provider.of<LoginProvider>(context);
+    var authNotifier = Provider.of<LoginNotifier>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -122,14 +134,28 @@ class _RegistrationState extends State<Registration> {
               ),
             ),
             SizedBox(
-              height: 50.h,
+              height: 40.h,
             ),
             GestureDetector(
-              onDoubleTap: () async {
-                await AuthHelper().signup(SignupModel(
-                    username: username.text,
-                    email: email.text,
-                    password: password.text));
+              onTap: () {
+                formValidation();
+                if (validation == true) {
+                  SignupModel model = SignupModel(
+                      username: username.text,
+                      email: email.text,
+                      password: password.text);
+
+                  authNotifier.registerUser(model).then((response) {
+                    if (response == true) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    }
+                  });
+                } else {
+                  debugPrint('Failed to sign up');
+                }
               },
               child: Container(
                 height: 50.h,

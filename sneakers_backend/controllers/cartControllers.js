@@ -4,7 +4,6 @@ const Cart = require("../models/Cart");
 module.exports = {
   addCart: async (req, res) => {
     console.log('addCart')
-
     const userId = req.user.id;
     console.log(userId)
     const { cartItem, quantity } = req.body;
@@ -17,11 +16,13 @@ module.exports = {
       const cart = await Cart.findOne({ userId });
      // console.log(cart);
       if (cart) {
-        const existingProduct = Cart.products.find(
-          (product) => product.cartItem.toString() === cartItem
+        console.log("Cart products:", cart.products);
+        const existingProduct = cart.products.find(
+          (product) => product.cartItem.toString() === cartItem.toString()
         );
-
-        console.log(existingProduct);
+    
+        console.log("Existing Product:", existingProduct);
+   
 
         if (existingProduct) {
           console.log('existingProduct')
@@ -42,6 +43,7 @@ module.exports = {
         res.status(200).json("Product added to the cart");
       }
     } catch (error) {
+      console.log(error);
       res.status(500).json(error);
     }
   },
