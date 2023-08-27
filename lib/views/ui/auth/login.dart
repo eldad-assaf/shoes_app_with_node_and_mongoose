@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/models/login_model.dart';
 import 'package:shoes_app_with_node_and_mongoose/services/auth_helper.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/appstyle.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/custom_textfield.dart';
@@ -107,7 +111,18 @@ class _LoginPageState extends State<LoginPage> {
               height: 50.h,
             ),
             GestureDetector(
-              onDoubleTap: () {},
+              onTap: () async {
+                final didLogin = await AuthHelper().login(LoginModel(
+                    email: 'eldadassaf2@gmail.com', password: '123456789'));
+                log('didLogin : $didLogin');
+                if (didLogin) {
+                  final prefs = await SharedPreferences.getInstance();
+                  final token = prefs.getString('token');
+                  if (token != null) {
+                    await AuthHelper().getProfile(token);
+                  }
+                }
+              },
               child: Container(
                 height: 50.h,
                 width: 300.w,
@@ -115,16 +130,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(0))),
                 child: Center(
-                  child: GestureDetector(
-                    onTap: () async {
-                      await AuthHelper().login(
-                          email: 'eldadassaf2@gmail.com',
-                          password: '123456789');
-                    },
-                    child: ReusableText(
-                        text: 'L O G I N',
-                        style: appstyle(18, Colors.black, FontWeight.bold)),
-                  ),
+                  child: ReusableText(
+                      text: 'L O G I N',
+                      style: appstyle(18, Colors.black, FontWeight.bold)),
                 ),
               ),
             )

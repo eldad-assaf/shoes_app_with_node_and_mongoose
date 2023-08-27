@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/models/signup_model.dart';
+import 'package:shoes_app_with_node_and_mongoose/services/auth_helper.dart';
 
 import '../../../controllers/login_provider.dart';
 import '../../shared/appstyle.dart';
@@ -123,7 +125,12 @@ class _RegistrationState extends State<Registration> {
               height: 50.h,
             ),
             GestureDetector(
-              onDoubleTap: () {},
+              onDoubleTap: () async {
+                await AuthHelper().signup(SignupModel(
+                    username: username.text,
+                    email: email.text,
+                    password: password.text));
+              },
               child: Container(
                 height: 50.h,
                 width: 300.w,
