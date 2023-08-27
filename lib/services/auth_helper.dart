@@ -7,7 +7,9 @@ import 'package:shoes_app_with_node_and_mongoose/models/login_res_model.dart';
 import 'package:shoes_app_with_node_and_mongoose/models/signup_model.dart';
 
 import '../models/login_model.dart';
+import '../models/profile_model.dart';
 import 'config.dart';
+
 //http://10.0.2.2:8000/api/users
 class AuthHelper {
   static var client = http.Client();
@@ -56,21 +58,22 @@ class AuthHelper {
     }
   }
 
-  Future<bool?> getProfile(String token) async {
+  Future<ProfileRes> getProfile() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? userToken = prefs.getString('token');
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'token': 'Bearer $token '
+      'token': 'Bearer $userToken'
     };
     var url = Uri.http(Config.apiUrl, Config.getUserUrl);
 
     var response = await http.get(url, headers: requestHeaders);
 
-    log(response.statusCode.toString());
     if (response.statusCode == 200) {
-    
-      return true;
+      var profile = profileResFromJson(response.body);
+      return profile;
     } else {
-      return false;
+      throw Exception('Failed to get the profile');
     }
   }
 }

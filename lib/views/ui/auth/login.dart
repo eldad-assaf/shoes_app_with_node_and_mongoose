@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/models/login_model.dart';
 import 'package:shoes_app_with_node_and_mongoose/services/auth_helper.dart';
@@ -114,13 +111,9 @@ class _LoginPageState extends State<LoginPage> {
               onTap: () async {
                 final didLogin = await AuthHelper().login(LoginModel(
                     email: 'eldadassaf2@gmail.com', password: '123456789'));
-                log('didLogin : $didLogin');
+
                 if (didLogin) {
-                  final prefs = await SharedPreferences.getInstance();
-                  final token = prefs.getString('token');
-                  if (token != null) {
-                    await AuthHelper().getProfile(token);
-                  }
+                  await AuthHelper().getProfile();
                 }
               },
               child: Container(
