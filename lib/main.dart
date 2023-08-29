@@ -24,7 +24,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => ProductNotifier()),
     ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
     ChangeNotifierProvider(create: (context) => LoginNotifier()),
-    ChangeNotifierProvider(create: (context) => CartNotifier()),
+    ChangeNotifierProvider(create: (context) => CartProvider()),
   ], child: const MyApp()));
 }
 

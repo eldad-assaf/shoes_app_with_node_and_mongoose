@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/cart_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/models/get_products.dart';
 import 'package:shoes_app_with_node_and_mongoose/services/cart_helper.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/appstyle.dart';
@@ -30,6 +32,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    var cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       backgroundColor: const Color(0xFFE2E2E2),
       body: Padding(
@@ -86,7 +89,9 @@ class _CartPageState extends State<CartPage> {
                               final data = cartData[index];
                               return GestureDetector(
                                 onTap: () {
-                                  log(index.toString());
+                                  cartProvider.setProductIndex = index;
+                                  log(cartProvider.productIndex.toString());
+                                  cartProvider.checkout.insert(0, data);
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),
@@ -128,23 +133,57 @@ class _CartPageState extends State<CartPage> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 4),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  CartHelper()
-                                                      .deleteItem(data.id);
-                                                },
-                                                child: const SizedBox(
-                                                  width: 20,
-                                                  height: 20,
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 4),
+                                                  child: GestureDetector(
+                                                    onTap: () {},
+                                                    child: SizedBox(
+                                                      width: 20,
+                                                      height: 20,
+                                                      child: Icon(
+                                                        cartProvider.productIndex ==
+                                                                index
+                                                            ? Feather
+                                                                .check_square
+                                                            : Feather.square,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 4),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      CartHelper()
+                                                          .deleteItem(data.id)
+                                                          .then((value) {
+                                                        if (value == true) {
+                                                          _cartList =
+                                                              CartHelper()
+                                                                  .getCart();
+                                                          setState(() {});
+                                                        }
+                                                      });
+                                                    },
+                                                    child: const SizedBox(
+                                                      width: 20,
+                                                      height: 20,
+                                                      child: Icon(
+                                                        Icons.delete,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                             Row(
                                               children: [
@@ -289,10 +328,12 @@ class _CartPageState extends State<CartPage> {
                 )
               ],
             ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child: CheckoutButton(label: "Proceed to Checkout"),
-            ),
+            cartProvider.checkout.isNotEmpty
+                ? const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: CheckoutButton(label: "Proceed to Checkout"),
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
       ),
