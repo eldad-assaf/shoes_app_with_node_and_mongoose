@@ -12,6 +12,7 @@ import 'package:shoes_app_with_node_and_mongoose/controllers/cart_provider.dart'
 import 'package:shoes_app_with_node_and_mongoose/controllers/favourites_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/checkout_btn.dart';
+import 'package:shoes_app_with_node_and_mongoose/views/ui/auth/login.dart';
 
 import '../../controllers/product_provider.dart';
 import '../../models/add_to_cart.dart';
@@ -51,7 +52,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     var favouritesNotifier = Provider.of<FavoritesNotifier>(context);
     var authNotifier = Provider.of<LoginNotifier>(context);
-    var cartNotifier = Provider.of<CartNotifier>(context);
+    var cartNotifier = Provider.of<CartProvider>(context);
 
     return Scaffold(body: Consumer<ProductNotifier>(
       builder: (context, productNotifier, child) {
@@ -375,6 +376,13 @@ class _ProductPageState extends State<ProductPage> {
                                                 .then((value) {
                                               log('add to cart  : $value');
                                             });
+                                          } else {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const LoginPage(),
+                                                ));
                                           }
                                           _createCart({
                                             "id": widget.sneakers.id,

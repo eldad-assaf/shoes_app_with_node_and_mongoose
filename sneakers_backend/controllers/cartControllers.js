@@ -52,7 +52,8 @@ module.exports = {
     const userId = req.user.id;
 
     try {
-      const cart = await Cart.findOne({ userId });
+      const cart = await Cart.findOne({ userId }).populate('products.cartItem', '_id name imageUrl price category');
+      console.log(cart);
       res.status(200).json(cart);
     } catch (error) {
       res.status(500).json({eldad : 'eldaddada'});
