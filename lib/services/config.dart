@@ -2,7 +2,7 @@ class Config {
   static const apiUrl = 'localhost:3005'; // ios simulator
   //static const apiUrl = '10.0.2.2:3005'; //android avd
 
-  static const paymentBaseUrl = 'stripeserver-production-28e7-up.railway.app';
+  static const paymentBaseUrl = 'paymentserver-production-04d0.up.railway.app';
   static const String loginUrl = '/api/login';
   static const String paymentUrl = '/stripe/create-checkout-session';
   static const String signupUrl = '/api/register';
