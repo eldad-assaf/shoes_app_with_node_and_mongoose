@@ -35,7 +35,7 @@ class LatestShoes extends StatelessWidget {
                     (index % 2 == 0) ? 1 : 1,
                     (index % 4 == 1 || index % 4 == 3)
                         ? MediaQuery.of(context).size.height * 0.35
-                        : MediaQuery.of(context).size.height * 0.3),
+                        : MediaQuery.of(context).size.height * 0.40),
                 itemBuilder: (context, index) {
                   final shoe = snapshot.data![index];
                   return GestureDetector(

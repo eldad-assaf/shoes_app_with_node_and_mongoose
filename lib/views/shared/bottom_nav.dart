@@ -42,22 +42,22 @@ class BottoNavBar extends StatelessWidget {
                       ? Ionicons.search
                       : Ionicons.search,
                 ),
+                // BotomNavWidget(
+                //   onTap: () {
+                //     mainScreenNotifier.pageIndex = 2;
+                //   },
+                //   icon: mainScreenNotifier.pageIndex == 2
+                //       ? Ionicons.add
+                //       : Ionicons.add_circle_outline,
+                // ),
                 BotomNavWidget(
                   onTap: () {
                     mainScreenNotifier.pageIndex = 2;
                   },
                   icon: mainScreenNotifier.pageIndex == 2
-                      ? Ionicons.add
-                      : Ionicons.add_circle_outline,
+                      ? Ionicons.cart
+                      : Ionicons.cart_outline,
                 ),
-                // BotomNavWidget(
-                //   onTap: () {
-                //     mainScreenNotifier.pageIndex = 3;
-                //   },
-                //   icon: mainScreenNotifier.pageIndex == 3
-                //       ? Ionicons.cart
-                //       : Ionicons.cart_outline,
-                // ),
                 BotomNavWidget(
                   onTap: () {
                     mainScreenNotifier.pageIndex = 3;

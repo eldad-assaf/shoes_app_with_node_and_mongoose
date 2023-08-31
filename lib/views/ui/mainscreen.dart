@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/views/ui/cartpage.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/ui/profile.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/ui/searchpage.dart';
 
 import '../../controllers/mainscreen_provider.dart';
 import '../shared/bottom_nav.dart';
 import 'homepage.dart';
-import 'nonuser.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
@@ -16,7 +16,7 @@ class MainScreen extends StatelessWidget {
   List<Widget> pageList = [
     const HomePage(),
     const SearchPage(),
-    const NonUser(),
+    const CartPage(),
     const ProfilePage()
   ];
 

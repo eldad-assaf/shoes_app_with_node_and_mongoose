@@ -7,6 +7,7 @@ import 'package:shoes_app_with_node_and_mongoose/controllers/cart_provider.dart'
 import 'package:shoes_app_with_node_and_mongoose/controllers/favourites_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/login_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/mainscreen_provider.dart';
+import 'package:shoes_app_with_node_and_mongoose/controllers/payment_controller.dart';
 import 'package:shoes_app_with_node_and_mongoose/controllers/product_provider.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/ui/mainscreen.dart';
 
@@ -25,6 +26,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
     ChangeNotifierProvider(create: (context) => LoginNotifier()),
     ChangeNotifierProvider(create: (context) => CartProvider()),
+    ChangeNotifierProvider(create: (context) => PaymentNotifier()),
   ], child: const MyApp()));
 }
 

@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:shoes_app_with_node_and_mongoose/views/shared/appstyle.dart';
 
 class StaggerTile extends StatefulWidget {
-  const StaggerTile({super.key, required this.imageUrl, required this.name, required this.price});
+  const StaggerTile(
+      {super.key,
+      required this.imageUrl,
+      required this.name,
+      required this.price});
 
   final String imageUrl;
   final String name;
@@ -31,18 +35,21 @@ class _StaggerTileState extends State<StaggerTile> {
               imageUrl: widget.imageUrl,
               fit: BoxFit.fill,
             ),
-
             Container(
-              padding:const EdgeInsets.only(top: 12),
+              padding: const EdgeInsets.only(top: 12),
               height: 75,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.name, 
-                  style: appstyleWithHt(20, Colors.black, FontWeight.w700, 1),),
-                  Text(widget.price, 
-                  style: appstyleWithHt(20, Colors.black, FontWeight.w500, 1),)
+                  Text(
+                    widget.name,
+                    style: appstyleWithHt(20, Colors.black, FontWeight.w700, 1),
+                  ),
+                  Text(
+                    widget.price,
+                    style: appstyleWithHt(20, Colors.black, FontWeight.w500, 1),
+                  )
                 ],
               ),
             )

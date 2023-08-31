@@ -156,7 +156,7 @@ class _ProductByCatState extends State<ProductByCat>
         backgroundColor: Colors.transparent,
         barrierColor: Colors.white54,
         builder: (context) => Container(
-              height: MediaQuery.of(context).size.height * 0.84,
+              height: MediaQuery.of(context).size.height * 0.90,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -177,13 +177,13 @@ class _ProductByCatState extends State<ProductByCat>
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.8,
                     child: Column(
                       children: [
                         const CustomSpacer(),
                         Text(
                           "Filter",
-                          style: appstyle(40, Colors.black, FontWeight.bold),
+                          style: appstyle(30, Colors.black, FontWeight.bold),
                         ),
                         const CustomSpacer(),
                         Text(
